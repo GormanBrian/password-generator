@@ -20,9 +20,6 @@ const dictionary = [
   },
 ];
 
-// Get reference to the element with id 'generate'
-var generateBtn = document.querySelector("#generate");
-
 /**
  * Prompts the user for password options, generates password from selected options
  * @returns {string} Generated password
@@ -60,6 +57,7 @@ function generatePassword() {
     );
   }
 
+  // Generate password randomly
   let password = "";
   for (var i = 0; i < count; i++) {
     // Add a new, random character to the password
@@ -70,7 +68,9 @@ function generatePassword() {
   return password;
 }
 
-// Write password to the #password input
+/**
+ * Write password to the #password input
+ */
 function writePassword() {
   var password = generatePassword();
   // Set the text of the element with id 'password'
@@ -78,5 +78,7 @@ function writePassword() {
   passwordText.value = password;
 }
 
+// Get reference to the element with id 'generate'
+var generateBtn = document.querySelector("#generate");
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
