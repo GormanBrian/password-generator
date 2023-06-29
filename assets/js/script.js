@@ -1,34 +1,53 @@
 // Global variables
-var letters = "abcdefghijklmnopqrstuvwxyz".split("");
-var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-var specialChars = " !\"#$%&'()*+,-./:;<=>?@[]^_`{|}~".split("");
+const letters = "abcdefghijklmnopqrstuvwxyz";
+// Dictionary contains all character types
+const dictionary = [
+  {
+    name: "uppercase letters",
+    chars: letters.toUpperCase().split(""),
+  },
+  {
+    name: "lowercase letters",
+    chars: letters.split(""),
+  },
+  {
+    name: "numbers",
+    chars: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  },
+  {
+    name: "special characters",
+    chars: " !\"#$%&'()*+,-./:;<=>?@[]^_`{|}~".split(""),
+  },
+];
 
 // Get reference to the element with id 'generate'
 var generateBtn = document.querySelector("#generate");
 
+/**
+ * Prompts the user for password options, generates password from selected options
+ * @returns {string} Generated password
+ */
 function generatePassword() {
-  var options = [];
-  function getOptions() {
-    if (confirm("Should the password include uppercase letters?")) {
-      options = options.concat(letters);
-    }
-    if (confirm("Should the password include lowercase letters?")) {
-      options = options.concat(letters.map((letter) => letter.toUpperCase()));
-    }
-    if (confirm("Should the password include numbers?")) {
-      options = options.concat(numbers);
-    }
-    if (confirm("Should the password include special characters?")) {
-      options = options.concat(specialChars);
-    }
-    return options;
+  /**
+   * Prompts the user for each character type, adds selected characters to flat array
+   * @returns {Array<string>} Array with all selected character types
+   */
+  function getCharacterTypes() {
+    var types = [];
+    // Loop over dictionary and ask if every character set should be included
+    dictionary.forEach(({ name, chars }) => {
+      if (confirm(`Should the password include ${name}?`)) {
+        types = types.concat(chars);
+      }
+    });
+    return types;
   }
 
   // Ask for options, if no options are given ask again
-  options = getOptions();
+  var options = getCharacterTypes();
   while (options.length <= 0) {
     alert("Please select at least one character type.");
-    options = getOptions();
+    options = getCharacterTypes();
   }
 
   // Get count, if count is invalid ask again
@@ -43,7 +62,10 @@ function generatePassword() {
 
   let password = "";
   for (var i = 0; i < count; i++) {
-    password.concat(options[Math.floor(Math.random() * count)]);
+    // Add a new, random character to the password
+    password = password.concat(
+      options[Math.floor(Math.random() * options.length)]
+    );
   }
   return password;
 }
@@ -51,8 +73,8 @@ function generatePassword() {
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
+  // Set the text of the element with id 'password'
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
 }
 
