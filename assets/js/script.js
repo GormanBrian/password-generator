@@ -1,4 +1,9 @@
-// Assignment Code
+// Global variables
+var count = 20;
+const uppercase = [];
+const lowercase = [];
+const specialChars = [];
+
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
