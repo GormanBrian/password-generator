@@ -6,27 +6,26 @@ var specialChars = " !\"#$%&'()*+,-./:;<=>?@[]^_`{|}~".split("");
 // Get reference to the element with id 'generate'
 var generateBtn = document.querySelector("#generate");
 
-function getOptions() {
-  var options = [];
-  if (confirm("Should the password include uppercase letters?")) {
-    options = options.concat(letters);
-  }
-  if (confirm("Should the password include lowercase letters?")) {
-    options = options.concat(letters.map((letter) => letter.toUpperCase()));
-  }
-  if (confirm("Should the password include numbers?")) {
-    options = options.concat(numbers);
-  }
-  if (confirm("Should the password include special characters?")) {
-    options = options.concat(specialChars);
-  }
-  return options;
-}
-
 function generatePassword() {
-  console.log(specialChars);
+  var options = [];
+  function getOptions() {
+    if (confirm("Should the password include uppercase letters?")) {
+      options = options.concat(letters);
+    }
+    if (confirm("Should the password include lowercase letters?")) {
+      options = options.concat(letters.map((letter) => letter.toUpperCase()));
+    }
+    if (confirm("Should the password include numbers?")) {
+      options = options.concat(numbers);
+    }
+    if (confirm("Should the password include special characters?")) {
+      options = options.concat(specialChars);
+    }
+    return options;
+  }
+
   // Ask for options, if no options are given ask again
-  var options = getOptions();
+  options = getOptions();
   while (options.length <= 0) {
     alert("Please select at least one character type.");
     options = getOptions();
