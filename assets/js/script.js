@@ -25,12 +25,21 @@ const dictionary = [
  * @returns {string} Generated password
  */
 function generatePassword() {
+  // Get count, if count is invalid ask again
+  let count = parseInt(prompt("Enter the length of the password"));
+  while (count < 8 || count > 128) {
+    count = parseInt(
+      prompt(
+        "That number is not between 8 and 128. Please enter a valid password length."
+      )
+    );
+  }
   /**
    * Prompts the user for each character type, adds selected characters to flat array
    * @returns {Array<string>} Array with all selected character types
    */
   function getCharacterTypes() {
-    var types = [];
+    let types = [];
     // Loop over dictionary and ask if every character set should be included
     dictionary.forEach(({ name, chars }) => {
       if (confirm(`Should the password include ${name}?`)) {
@@ -41,25 +50,15 @@ function generatePassword() {
   }
 
   // Ask for options, if no options are given ask again
-  var options = getCharacterTypes();
+  let options = getCharacterTypes();
   while (options.length <= 0) {
     alert("Please select at least one character type.");
     options = getCharacterTypes();
   }
 
-  // Get count, if count is invalid ask again
-  let count = parseInt(prompt("Enter the length of the password"));
-  while (count < 8 || count > 128) {
-    count = parseInt(
-      prompt(
-        "That number is not between 8 and 128. Please enter a valid password length."
-      )
-    );
-  }
-
   // Generate password randomly
   let password = "";
-  for (var i = 0; i < count; i++) {
+  for (let i = 0; i < count; i++) {
     // Add a new, random character to the password
     password = password.concat(
       options[Math.floor(Math.random() * options.length)]
@@ -72,7 +71,7 @@ function generatePassword() {
  * Write password to the #password input
  */
 function writePassword() {
-  var password = generatePassword();
+  let password = generatePassword();
   // Set the text of the element with id 'password'
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
