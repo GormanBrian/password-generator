@@ -1,5 +1,4 @@
 // Global variables
-var count = 20;
 const uppercase = [];
 const lowercase = [];
 const numbers = [];
@@ -10,23 +9,36 @@ var generateBtn = document.querySelector("#generate");
 
 function generatePassword() {
   let options = [];
-  if (confirm("Should the password include uppercase letters?")) {
-    options.concat(uppercase);
-  }
-  if (confirm("Should the password include lowercase letters?")) {
-    options.concat(lowercase);
-  }
-  if (confirm("Should the password include numbers?")) {
-    options.concat(numbers);
-  }
-  if (confirm("Should the password include special characters?")) {
-    options.concat(specialChars);
+
+  function getOptions() {
+    if (confirm("Should the password include uppercase letters?")) {
+      options.concat(uppercase);
+    }
+    if (confirm("Should the password include lowercase letters?")) {
+      options.concat(lowercase);
+    }
+    if (confirm("Should the password include numbers?")) {
+      options.concat(numbers);
+    }
+    if (confirm("Should the password include special characters?")) {
+      options.concat(specialChars);
+    }
   }
 
+  // Ask for options, if no options are given ask again
+  getOptions();
+  while (!(options.length > 0)) {
+    alert("Please select at least one character type.");
+    getOptions();
+  }
+
+  // Get count, if count is invalid ask again
   let count = parseInt(prompt("Enter the length of the password"));
   while (count < 8 || count > 128) {
-    count = prompt(
-      "That number is not between 8 and 128. Please enter a valid password length."
+    count = parseInt(
+      prompt(
+        "That number is not between 8 and 128. Please enter a valid password length."
+      )
     );
   }
 }
