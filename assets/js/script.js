@@ -1,35 +1,61 @@
 // Global variables
-const uppercase = [];
-const lowercase = [];
-const numbers = [];
-const specialChars = [];
+var letters = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
+var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+var specialChars = [];
 
 // Get reference to the element with id 'generate'
 var generateBtn = document.querySelector("#generate");
 
-function generatePassword() {
-  let options = [];
-
-  function getOptions() {
-    if (confirm("Should the password include uppercase letters?")) {
-      options.concat(uppercase);
-    }
-    if (confirm("Should the password include lowercase letters?")) {
-      options.concat(lowercase);
-    }
-    if (confirm("Should the password include numbers?")) {
-      options.concat(numbers);
-    }
-    if (confirm("Should the password include special characters?")) {
-      options.concat(specialChars);
-    }
+function getOptions() {
+  var options = [];
+  if (confirm("Should the password include uppercase letters?")) {
+    options = options.concat(letters);
   }
+  if (confirm("Should the password include lowercase letters?")) {
+    options = options.concat(letters.map((letter) => letter.toUpperCase()));
+  }
+  if (confirm("Should the password include numbers?")) {
+    options = options.concat(numbers);
+  }
+  if (confirm("Should the password include special characters?")) {
+    options = options.concat(specialChars);
+  }
+  return options;
+}
 
+function generatePassword() {
   // Ask for options, if no options are given ask again
-  getOptions();
-  while (!(options.length > 0)) {
+  var options = getOptions();
+  while (options.length <= 0) {
     alert("Please select at least one character type.");
-    getOptions();
+    options = getOptions();
   }
 
   // Get count, if count is invalid ask again
@@ -41,6 +67,12 @@ function generatePassword() {
       )
     );
   }
+
+  let password = "";
+  for (var i = 0; i < count; i++) {
+    password.concat(options[Math.floor(Math.random() * count)]);
+  }
+  return password;
 }
 
 // Write password to the #password input
