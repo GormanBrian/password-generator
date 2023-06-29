@@ -1,34 +1,7 @@
 // Global variables
-var letters = [
-  "a",
-  "b",
-  "c",
-  "d",
-  "e",
-  "f",
-  "g",
-  "h",
-  "i",
-  "j",
-  "k",
-  "l",
-  "m",
-  "n",
-  "o",
-  "p",
-  "q",
-  "r",
-  "s",
-  "t",
-  "u",
-  "v",
-  "w",
-  "x",
-  "y",
-  "z",
-];
+var letter = "abcdefghijklmnopqrstuvwxyz".split("");
 var numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-var specialChars = [];
+var specialChars = " !\"#$%&'()*+,-./:;<=>?@[]^_`{|}~".split("");
 
 // Get reference to the element with id 'generate'
 var generateBtn = document.querySelector("#generate");
@@ -51,6 +24,7 @@ function getOptions() {
 }
 
 function generatePassword() {
+  console.log(specialChars);
   // Ask for options, if no options are given ask again
   var options = getOptions();
   while (options.length <= 0) {
