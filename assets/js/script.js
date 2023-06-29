@@ -34,6 +34,7 @@ function generatePassword() {
       )
     );
   }
+
   /**
    * Prompts the user for each character type, adds selected characters to flat array
    * @returns {Array<string>} Array with all selected character types
@@ -64,6 +65,7 @@ function generatePassword() {
       options[Math.floor(Math.random() * options.length)]
     );
   }
+
   return password;
 }
 
