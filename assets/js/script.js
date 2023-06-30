@@ -25,22 +25,18 @@ const dictionary = [
  * @returns {string} Generated password
  */
 function generatePassword() {
-  // Get count, if count is invalid ask again
-  let count = parseInt(
-    prompt("Enter a password length between 8 and 128 characters")
-  );
-  if (Number.isNaN(count)) {
-    return null;
-  }
-  while (!(count > 8 && count < 128)) {
-    count = parseInt(
-      prompt(
-        "That number is not between 8 and 128. Please enter a valid password length."
-      )
+  /**
+   * Gets the length of the password from the user
+   * @param {string} text Line of text to precede the default prompt
+   * @returns {null | string | number} Null for exit, string for invalid input, and number for valid input
+   */
+  function getCount(text = "") {
+    let len = prompt(
+      text + "Enter a password length between 8 and 128 characters"
     );
-    if (Number.isNaN(count)) {
-      return null;
-    }
+    if (len === null) return null;
+    else if (Number.isNaN(len) || len === "") return len;
+    else return parseInt(len);
   }
 
   /**
@@ -56,6 +52,21 @@ function generatePassword() {
       }
     });
     return types;
+  }
+
+  // Get count, if count is invalid ask again
+  count = getCount();
+  if (count == null) return null;
+  // Checks the validity of the input and reprompts with a relevent message
+  while (!(count > 8 && count < 128)) {
+    // Empty input
+    if (count === "") count = getCount("The input is empty.\n");
+    // Any other string input
+    else if (Number.isNaN(count)) count = getCount("That is not a number.\n");
+    // Number outside bounds
+    else count = getCount("That number is not between 8 and 128.\n");
+    // If user selects cancel exit password generation
+    if (count == null) return null;
   }
 
   // Ask for options, if no options are given ask again
