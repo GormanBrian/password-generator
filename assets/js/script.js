@@ -56,21 +56,21 @@ function generatePassword() {
 
   // Get count, if count is invalid ask again
   count = getCount();
-  if (count == null) return null;
   // Checks the validity of the input and reprompts with a relevent message
   while (!(count > 8 && count < 128)) {
+    if (count == null) return null;
     // Empty input
     if (count === "") count = getCount("The input is empty.\n");
-    // Any other string input
+    // Any other non-number string input
     else if (Number.isNaN(count)) count = getCount("That is not a number.\n");
     // Number outside bounds
     else count = getCount("That number is not between 8 and 128.\n");
     // If user selects cancel exit password generation
-    if (count == null) return null;
   }
 
-  // Ask for options, if no options are given ask again
+  // Ask for options
   let options = getCharacterTypes();
+  // If no options are selected show a message and ask again
   while (options.length <= 0) {
     alert("Please select at least one character type.");
     options = getCharacterTypes();
