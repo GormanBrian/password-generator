@@ -1,6 +1,6 @@
 // Global variables
 const letters = "abcdefghijklmnopqrstuvwxyz";
-// Dictionary contains all character types
+// Dictionary contains all character types, can be appended
 const dictionary = [
   {
     name: "uppercase letters",
@@ -19,6 +19,11 @@ const dictionary = [
     chars: " !\"#$%&'()*+,-./:;<=>?@[]^_`{|}~".split(""),
   },
 ];
+// Range of acceptable password lengths, can be modified
+const bounds = {
+  lower: 8,
+  upper: 128,
+};
 
 /**
  * Prompts the user for password options, generates password from selected options
@@ -32,7 +37,8 @@ function generatePassword() {
    */
   function getCount(text = "") {
     let len = prompt(
-      text + "Enter a password length between 8 and 128 characters"
+      text +
+        `Enter a password length between ${bounds.lower} and ${bounds.upper} characters`
     );
     if (len === null) return null;
     else if (Number.isNaN(len) || len === "") return len;
@@ -57,14 +63,17 @@ function generatePassword() {
   // Get count, if count is invalid ask again
   count = getCount();
   // Checks the validity of the input and reprompts with a relevent message
-  while (!(count > 8 && count < 128)) {
+  while (!(count > bounds.lower && count < bounds.upper)) {
     if (count == null) return null;
     // Empty input
     if (count === "") count = getCount("The input is empty.\n");
     // Any other non-number string input
     else if (Number.isNaN(count)) count = getCount("That is not a number.\n");
     // Number outside bounds
-    else count = getCount("That number is not between 8 and 128.\n");
+    else
+      count = getCount(
+        "That number is outside the range of allowed lengths.\n"
+      );
     // If user selects cancel exit password generation
   }
 
