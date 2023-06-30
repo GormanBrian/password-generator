@@ -63,7 +63,7 @@ function generatePassword() {
   // Get count, if count is invalid ask again
   count = getCount();
   // Checks the validity of the input and reprompts with a relevent message
-  while (!(count > bounds.lower && count < bounds.upper)) {
+  while (!(count >= bounds.lower && count <= bounds.upper)) {
     if (count == null) return null;
     // Empty input
     if (count === "") count = getCount("The input is empty.\n");
