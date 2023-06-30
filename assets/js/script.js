@@ -26,13 +26,21 @@ const dictionary = [
  */
 function generatePassword() {
   // Get count, if count is invalid ask again
-  let count = parseInt(prompt("Enter the length of the password"));
+  let count = parseInt(
+    prompt("Enter a password length between 8 and 128 characters")
+  );
+  if (Number.isNaN(count)) {
+    return null;
+  }
   while (!(count > 8 && count < 128)) {
     count = parseInt(
       prompt(
         "That number is not between 8 and 128. Please enter a valid password length."
       )
     );
+    if (Number.isNaN(count)) {
+      return null;
+    }
   }
 
   /**
@@ -76,7 +84,9 @@ function writePassword() {
   let password = generatePassword();
   // Set the text of the element with id 'password'
   var passwordText = document.querySelector("#password");
-  passwordText.value = password;
+  if (password !== null) {
+    passwordText.value = password;
+  }
 }
 
 // Get reference to the element with id 'generate'
