@@ -27,7 +27,7 @@ const dictionary = [
 function generatePassword() {
   // Get count, if count is invalid ask again
   let count = parseInt(prompt("Enter the length of the password"));
-  while (count < 8 || count > 128) {
+  while (!(count > 8 && count < 128)) {
     count = parseInt(
       prompt(
         "That number is not between 8 and 128. Please enter a valid password length."
