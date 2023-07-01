@@ -11,9 +11,13 @@ When the user hits the **Generate Password** button they are presented with a se
 - Numbers
 - Special characters
 
+## Usage
+
+Visit the live site [here](https://GormanBrian.github.io/password-generator)
+
 ## Useful Links
 
-- Visit the live site [here](https://GormanBrian.github.io/password-generator)
+- [Source code](https://github.com/coding-boot-camp/friendly-parakeet)
 - See a list of special characters [here](https://owasp.org/www-community/password-special-characters)
 
 ---
