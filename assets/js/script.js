@@ -42,7 +42,7 @@ function generatePassword() {
     );
     if (len === null) return null;
     else if (Number.isNaN(len) || len === "") return len;
-    else return parseInt(len);
+    else return parseInt(len, 10);
   }
 
   /**
